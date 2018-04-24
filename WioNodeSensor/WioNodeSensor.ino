@@ -42,6 +42,7 @@ void setup() {
   pinMode(FUNC_BTN, INPUT);
   pinMode(BLUE_LED, OUTPUT);
   pinMode(PORT_POWER, OUTPUT);
+  digitalWrite(BLUE_LED, HIGH);
   digitalWrite(PORT_POWER, HIGH);
   Serial.begin(115200);
   Wire.begin(I2C_SDA,I2C_SCL) ;
@@ -60,7 +61,7 @@ void setup() {
   //wifi_set_sleep_type(LIGHT_SLEEP_T);
 
   if ((ESP.getResetInfoPtr())->reason != REASON_DEEP_SLEEP_AWAKE) {
-    digitalWrite(BLUE_LED, HIGH);
+    digitalWrite(BLUE_LED, LOW);
     Serial.println(getManufacturerId(), HEX);
   }
 
@@ -68,7 +69,6 @@ void setup() {
 
   ESP.deepSleep(300 * 1000 * 1000 - micros() , WAKE_RF_DEFAULT);
   delay(1);
-
 }
 
 void sendStat() {
